@@ -147,6 +147,23 @@ npm run build
 npm start
 ```
 
+## Screenshots
+
+### @Mention & Progress Indicator
+![OpenSCV @mention and progress](./docs/OpenSCV_01.png)
+
+### Thread Response Streaming
+![OpenSCV thread response](./docs/OpenSCV_02.png)
+
+### Full Channel View
+![OpenSCV full channel view](./docs/OpenSCV_03.png)
+
+### Source Links & Image Generation Request
+![OpenSCV source links and image generation](./docs/OpenSCV_04.png)
+
+### Image Generation Result
+![OpenSCV image generation result](./docs/OpenSCV_05.png)
+
 ## Usage
 
 ### @Mention in a Channel

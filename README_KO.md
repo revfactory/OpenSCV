@@ -145,6 +145,23 @@ npm run build
 npm start
 ```
 
+## 스크린샷
+
+### @멘션 & 진행 상태 표시
+![OpenSCV @멘션 및 진행 상태](./docs/OpenSCV_01.png)
+
+### 스레드 스트리밍 응답
+![OpenSCV 스레드 응답](./docs/OpenSCV_02.png)
+
+### 전체 채널 뷰
+![OpenSCV 전체 채널 뷰](./docs/OpenSCV_03.png)
+
+### 출처 링크 & 이미지 생성 요청
+![OpenSCV 출처 링크 및 이미지 생성](./docs/OpenSCV_04.png)
+
+### 이미지 생성 결과
+![OpenSCV 이미지 생성 결과](./docs/OpenSCV_05.png)
+
 ## 사용법
 
 ### 채널에서 @멘션
