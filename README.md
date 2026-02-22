@@ -5,6 +5,15 @@ Your versatile AI construction bot working in Slack
 A Slack bot that remotely executes Claude Code CLI via @mentions or DMs and returns results in Slack threads.
 Uses Socket Mode — no public IP or ngrok required.
 
+### Highlights
+
+- **Slack as Interface** — Run Claude Code from any Slack channel or DM via @mention
+- **Per-Channel Project Mapping** — Each channel maps to a different project directory
+- **Socket Mode** — No public IP or ngrok needed
+- **Shell Injection Safe** — Uses `child_process.spawn`, not shell execution
+- **Smart Message Handling** — Auto-splits long responses, markdown-to-text conversion
+- **Built-in Safety** — Dual timeout, deduplication, user permission control, infinite loop prevention
+
 > **⚠️ Experimental Beta**
 > This project is in early beta. Features may change without notice, and unexpected behavior may occur. Not recommended for production use. Use at your own risk.
 
