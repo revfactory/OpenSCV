@@ -1,0 +1,9 @@
+{
+  "defaultDirectory": "/Users/username/projects",
+  "channelDirectoryMap": {
+    "C0123456789": "/Users/username/projects/my-app",
+    "C9876543210": "/Users/username/projects/another-app"
+  },
+  "allowedUserIds": [],
+  "claudeTimeout": 600000
+}

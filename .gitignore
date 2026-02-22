@@ -1,0 +1,9 @@
+.env
+.env.local
+.env.*.local
+config.json
+dist/
+node_modules/
+*.log
+*.tgz
+.idea/

@@ -1,0 +1,21 @@
+{
+  "name": "slack-claude-bot",
+  "version": "1.0.0",
+  "description": "Slack bot to control Claude Code CLI remotely",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@slack/bolt": "^4.1.0",
+    "dotenv": "^17.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

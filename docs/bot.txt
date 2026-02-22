@@ -1,0 +1,80 @@
+Slack → Claude Code 제어 봇 구현 계획
+
+ Context
+
+ Slack에서 @멘션이나 DM으로 Claude Code CLI를 원격 실행하고, 결과를 Slack 스레드에 반환하는 봇을 구현한다. Socket Mode를 사용하여 공인
+ IP나 ngrok 없이 동작한다.
+
+ 프로젝트 구조
+
+/OpenSCV
+ ├── package.json
+ ├── tsconfig.json
+ ├── .env.example
+ ├── config.json          # 채널↔디렉토리 매핑
+ ├── README.md            # Slack App 생성 가이드
+ └── src/
+     ├── index.ts         # Bolt 앱 진입점, 이벤트 핸들러
+     ├── claude.ts        # claude CLI 실행 (child_process.spawn)
+     ├── config.ts        # 설정 로딩, 채널 매핑, 권한 체크
+     └── slack-helpers.ts # 메시지 분할, 블록 포맷팅
+
+ 핵심 기술 스택
+
+ - @slack/bolt v4 (Socket Mode) — 공인 URL 불필요
+ - TypeScript + tsx (dev 핫리로드)
+ - child_process.spawn — claude -p "prompt" --output-format text 실행
+
+ 주요 구현 사항
+
+ 1. src/config.ts — 설정 관리
+
+ - config.json에서 채널 ID → 프로젝트 디렉토리 매핑 로드
+ - defaultDirectory 지원 (DM 등 매핑 없는 채널용)
+ - 허용 사용자 ID 필터링 (빈 배열 = 전원 허용)
+ - 환경변수 > JSON 설정 우선순위
+
+2. src/claude.ts — Claude CLI 실행 엔진
+
+ - spawn으로 argument array 전달 (쉘 인젝션 방지)
+ - CLAUDECODE 환경변수 제거 (중첩 세션 감지 방지)
+ - 이중 타임아웃: spawn 옵션 + 수동 setTimeout
+ - SIGTERM → 5초 후 SIGKILL 강제 종료
+ - 모든 경로에서 ClaudeResult 객체 반환 (reject 없음)
+
+ 3. src/slack-helpers.ts — Slack 메시지 포맷팅
+
+ - 3000자 제한에 맞춰 줄바꿈 기준 분할
+ - 코드블록(```)으로 래핑
+ - 메타데이터 푸터 (작업 디렉토리, 소요시간, 타임아웃 여부)
+ - 봇 멘션 텍스트 제거
+
+ 4. src/index.ts — 메인 봇 로직
+
+ - @멘션: app_mention 이벤트 → 스레드 응답
+ - DM: message.im 이벤트 → 스레드 응답
+ - "생각 중..." 패턴: 즉시 thinking 메시지 → chat.update로 결과로 교체
+ - 중복 방지: Set<channel-ts> 기반 deduplication
+ - 권한 체크: 미허용 사용자에게 거부 메시지
+
+ 5. README.md — Slack App 설정 가이드
+
+ - Slack App 생성 → Socket Mode 활성화 → 토큰 발급
+ - 필요 Bot Token Scopes: app_mentions:read, chat:write, im:history, im:read, im:write
+ - Event Subscriptions: app_mention, message.im
+ - 채널 ID 찾는 방법, config.json 설정 방법
+
+ 실행 방법
+
+ npm install
+ cp .env.example .env     # 토큰 입력
+ # config.json에 채널 매핑 설정
+ npm run dev              # 개발 모드
+
+검증 방법
+
+ 1. npm run build — TypeScript 컴파일 성공 확인
+ 2. .env에 Slack 토큰 설정 후 npm run dev 실행
+ 3. Slack에서 봇 @멘션 → "생각 중..." 표시 확인 → 결과 응답 확인
+ 4. DM으로 메시지 전송 → 응답 확인
+ 5. 매핑되지 않은 채널에서 멘션 → 에러 메시지 확인
