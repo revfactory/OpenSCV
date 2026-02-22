@@ -164,6 +164,9 @@ npm start
 ### Image Generation Result
 ![OpenSCV image generation result](./docs/OpenSCV_05.png)
 
+### Terminal Execution Log
+![OpenSCV terminal log](./docs/OpenSCV_06.png)
+
 ## Usage
 
 ### @Mention in a Channel

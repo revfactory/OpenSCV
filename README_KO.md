@@ -162,6 +162,9 @@ npm start
 ### 이미지 생성 결과
 ![OpenSCV 이미지 생성 결과](./docs/OpenSCV_05.png)
 
+### 터미널 실행 로그
+![OpenSCV 터미널 실행 로그](./docs/OpenSCV_06.png)
+
 ## 사용법
 
 ### 채널에서 @멘션

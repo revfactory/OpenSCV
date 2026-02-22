@@ -1,7 +1,8 @@
 {
-  "name": "slack-claude-bot",
+  "name": "OpenSCV",
   "version": "1.0.0",
   "description": "Slack bot to control Claude Code CLI remotely",
+  "author": "Minho Hwang <revfactory@gmail.com>",
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
